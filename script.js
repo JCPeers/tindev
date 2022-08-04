@@ -2,26 +2,44 @@ const fakeData = [
   {
     name: "Brian",
     age: 45,
-    bio: "Developer, lives with his mum",
+    bio: "Developer. I live with my mum",
     attractiveness: 5.5,
-    avatar:
-      "https://www.industryconnect.org/wp-content/uploads/2016/04/Computer-Nerd.jpg",
+    avatar: "images/brian-img.jpg",
   },
   {
     name: "Clive",
     age: 51,
     bio: "I'd love to join your tables",
     attractiveness: 7,
-    avatar:
-      "https://media.istockphoto.com/photos/retro-computer-office-nerd-at-home-office-picture-id617888054?k=20&m=617888054&s=170667a&w=0&h=v5OI0IvEZJ3VSGbcvTj9uDnimsikeIuOghd3B_QBASA=",
+    avatar: "images/clive-img.jpg",
   },
   {
     name: "Walter",
     age: 42,
     bio: "I collect stamps",
     attractiveness: 6.7,
-    avatar:
-      "https://images.freeimages.com/images/premium/previews/1926/19263545-excited-geeky-nerd-computer-science-work-man-vintage-style.jpg",
+    avatar: "images/walter-img.jpg",
+  },
+  {
+    name: "Frank",
+    age: 30,
+    bio: "I love a sardine sandwich",
+    attractiveness: 5,
+    avatar: "images/frank-img.jpg",
+  },
+  {
+    name: "Craig",
+    age: 29,
+    bio: "Do you enjoy pickles?",
+    attractiveness: 7.8,
+    avatar: "images/craig-img.jpg",
+  },
+  {
+    name: "Bill",
+    age: 19,
+    bio: "I work for Microsoft. Do you dig that?",
+    attractiveness: 6,
+    avatar: "images/bill-img.jpg",
   },
 ];
 
@@ -34,8 +52,7 @@ class Developer {
 
   getDeveloper() {
     return `
-      <div id="card">
-      <div id="information">
+        <div id="information-container">
           <h2>${this.name}</h2>
           <p><span>Age</span>: ${this.age} &nbsp &nbsp 
           <i class="fa-solid fa-computer-mouse"></i> &nbsp &nbsp Bio: ${this.bio}
@@ -50,7 +67,7 @@ class Developer {
             <button class="nope"><span>Sadly not my type</span></button>
           </div>
         </div>
-      </div>
+     
     `;
   }
 }
@@ -67,12 +84,14 @@ document.getElementsByTagName("button")[1].addEventListener("click", no);
 function render() {
   currentDeveloperIndex += 1;
 
-  if (currentDeveloperIndex < fakeData.length) {
-    currentDeveloper = new Developer(fakeData[currentDeveloperIndex]);
-    card.innerHTML = currentDeveloper.getDeveloper();
-    document.getElementsByTagName("button")[0].addEventListener("click", yes);
-    document.getElementsByTagName("button")[1].addEventListener("click", no);
+  if (currentDeveloperIndex === fakeData.length) {
+    currentDeveloperIndex = 0;
   }
+
+  currentDeveloper = new Developer(fakeData[currentDeveloperIndex]);
+  card.innerHTML = currentDeveloper.getDeveloper();
+  document.getElementsByTagName("button")[0].addEventListener("click", yes);
+  document.getElementsByTagName("button")[1].addEventListener("click", no);
 }
 function yes() {
   currentDeveloper.liked = true;
